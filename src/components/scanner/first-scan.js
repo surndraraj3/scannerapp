@@ -36,15 +36,18 @@ class FirstScan extends Component {
           style={{ flex: 1, margin: 10, alignItems: "center", paddingTop: 30 }}
         >
           <Text style={{ fontSize: 20 }}>First Scan.</Text>
+          <TouchableHighlight
+            onPress={() =>
+              this.props.navigation.navigate("FormulatingResponse")
+            }
+          >
+            <Image
+              source={require("../../../assets/scannow.png")}
+              style={{ alignItems: "center" }}
+            />
+          </TouchableHighlight>
         </View>
-        <TouchableHighlight
-          onPress={() => this.props.navigation.navigate("FormulatingResponse")}
-        >
-          <Image
-            source={require("../../../assets/ayurvedic.png")}
-            style={{ width: 200, height: 200, alignItems: 'center' }}
-          />
-        </TouchableHighlight>
+
         <View>
           <Image
             style={{ position: "absolute", right: 10, bottom: 10 }}
