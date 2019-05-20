@@ -27,15 +27,13 @@ class FirstScan extends Component {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+      <SafeAreaView style={appStyleSheets.bgSafeArea}>
         <Image
           style={appStyleSheets.headerBackgroundImg}
           source={require("../../../assets/bgheader.jpg")}
         />
-        <View
-          style={{ flex: 1, margin: 10, alignItems: "center", paddingTop: 30 }}
-        >
-          <Text style={{ fontSize: 20 }}>First Scan.</Text>
+        <View style={appStyleSheets.bodyView}>
+          <Text style={appStyleSheets.bodyText}>First Scan.</Text>
           <TouchableHighlight
             onPress={() =>
               this.props.navigation.navigate("FormulatingResponse")
@@ -48,11 +46,8 @@ class FirstScan extends Component {
           </TouchableHighlight>
         </View>
 
-        <View>
-          <Image
-            style={{ position: "absolute", right: 10, bottom: 10 }}
-            source={require("../../../assets/arrowright.png")}
-          />
+        <View style={appStyleSheets.rightArrow}>
+          <Image source={require("../../../assets/arrowright.png")} />
         </View>
       </SafeAreaView>
     );

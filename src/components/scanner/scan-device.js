@@ -1,12 +1,20 @@
 import React, { Component } from "react";
-import { Text, View, Image, Button, SafeAreaView } from "react-native";
+import {
+  Text,
+  View,
+  Image,
+  Button,
+  SafeAreaView,
+  TouchableOpacity,
+  Platform
+} from "react-native";
 import { Speech } from "expo";
 import appStyleSheets from "../../styles/styles";
 import { DeviceURL } from "../common/base-scanner-ip";
 
 class ScanDevice extends Component {
   state = {
-    speechText: "Turn on scanner. Wait for light to blink ? Scan for device"
+    speechText: "Turn on scanner. Wait for light to blink ? "
   };
   componentDidMount() {
     // console.log('C', device_ip)
@@ -14,6 +22,7 @@ class ScanDevice extends Component {
     this.onLoadSpeech();
   }
   onLoadSpeech = () => {
+    //Turn on scanner. Wait for light to blink ? Scan for device
     Speech.speak(this.state.speechText, {
       language: "en",
       pitch: 1,
@@ -23,30 +32,36 @@ class ScanDevice extends Component {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+      <SafeAreaView style={appStyleSheets.bgSafeArea}>
         <Image
           style={appStyleSheets.headerBackgroundImg}
           source={require("../../../assets/bgheader.jpg")}
         />
-        <View
-          style={{ flex: 1, margin: 10, alignItems: "center", paddingTop: 30 }}
-        >
-          <Text style={{ fontSize: 20 }}>Turn on scanner.</Text>
-          <Text style={{ fontSize: 20 }}>Wait for light to blink ?</Text>
-          <Text style={{ fontSize: 20 }}>Scan for device</Text>
+        <View style={appStyleSheets.bodyView}>
+          <Text style={appStyleSheets.bodyText}>Turn on scanner.</Text>
+          <Text style={appStyleSheets.bodyText}>Wait for light to blink ?</Text>
+          <Text style={appStyleSheets.bodyText}>Scan for device</Text>
         </View>
         <View style={appStyleSheets.btnScanForDevice}>
-          <Button
-            onPress={() => this.props.navigation.navigate("FirstScan")}
-            title="SCAN FOR DEVICE"
-            color="#42d396"            
-          />
+          {Platform.OS === "ios" ? (
+            <TouchableOpacity
+              style={appStyleSheets.iosButtonTouchOpacity}
+              onPress={() => this.props.navigation.navigate("FirstScan")}
+            >
+              <Text style={appStyleSheets.iosTextForButton}>
+                SCAN FOR DEVICE
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <Button
+              onPress={() => this.props.navigation.navigate("FirstScan")}
+              title="SCAN FOR DEVICE"
+              color="#42d396"
+            />
+          )}
         </View>
-        <View>
-          <Image
-            style={{ position: "absolute", right: 10, bottom: 10 }}
-            source={require("../../../assets/arrowright.png")}
-          />
+        <View style={appStyleSheets.rightArrow}>
+          <Image source={require("../../../assets/arrowright.png")} />
         </View>
       </SafeAreaView>
     );
